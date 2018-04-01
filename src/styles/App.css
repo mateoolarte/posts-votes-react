@@ -1,0 +1,36 @@
+.containerFlex {
+  display: flex;
+  align-items: center;
+}
+
+.sortPosts {
+  display: flex;
+  align-items: center;
+}
+
+.post__author {
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.containerFlex img {
+  border-radius: 50%;
+}
+
+.post__voteContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.post__vote {
+  font-size: 3rem;
+  line-height: 2rem;
+}
+
+.post__voteNumber {
+  font-size: 2rem;
+}
