@@ -27,8 +27,15 @@
 }
 
 .post__vote {
+  border: 0;
+  color: #3272dc;
   font-size: 3rem;
   line-height: 2rem;
+  cursor: pointer;
+}
+
+.post__vote:hover {
+  color: #363636;
 }
 
 .post__voteNumber {

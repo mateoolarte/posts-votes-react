@@ -1,25 +1,62 @@
-import React, { Component } from 'react';
-import dataPosts from "./Data"
+import React, { Component } from "react";
+import dataPosts from "./Data";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import arrowUp from "@fortawesome/fontawesome-free-solid/faCaretUp";
 import arrowDown from "@fortawesome/fontawesome-free-solid/faCaretDown";
-import '../styles/App.css';
+import "../styles/App.css";
 
 class App extends Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
       posts: []
+    };
+  }
+
+  compareValues(order = "asc") {
+    return (a, b) => {
+      let comparison = 0;
+
+      if (a.votes > b.votes) {
+        comparison = 1;
+      } else if (a.votes < b.votes) {
+        comparison = -1;
+      }
+
+      return order === "desc" ? comparison * -1 : comparison;
+    };
+  };
+
+  updatedDataPosts(actualItem, btnAddClass, sorting) {
+    let itemWithoutChange = document.getElementById(btnAddClass);
+
+    const dataSortable = dataPosts.sort(this.compareValues(sorting));
+
+    this.setState({ posts: dataSortable });
+
+    if (!itemWithoutChange.classList.contains("is-outlined")) {
+      itemWithoutChange.classList.add("is-outlined");
     }
+
+    actualItem.classList.remove("is-outlined");
   }
 
   componentWillMount() {
     this.setState({ posts: dataPosts });
   }
 
+  orderAsc(e) {
+    this.updatedDataPosts(e.target, "desc-btn", "asc");
+  }
+
+  orderDesc(e) {
+    this.updatedDataPosts(e.target, "asc-btn", "desc");
+  }
+
   render() {
-    return <div className="App section">
+    return (
+      <div className="App section">
         <div className="container">
           <h1 className="title has-text-centered is-size-2">
             Blog posts populares
@@ -29,14 +66,25 @@ class App extends Component {
             <span className="has-text-weight-semibold margin-right-1">
               Orden:
             </span>
-            <a className="button is-link is-outlined margin-right-1">
+            <button
+              onClick={this.orderAsc.bind(this)}
+              className="button is-link is-outlined margin-right-1"
+              id="asc-btn"
+            >
               Ascendente
-            </a>
-            <a className="button is-link">Descendente</a>
+            </button>
+            <button
+              onClick={this.orderDesc.bind(this)}
+              className="button is-link is-outlined"
+              id="desc-btn"
+            >
+              Descendente
+            </button>
           </div>
           <section className="posts">
             {this.state.posts.map(post => {
-              return <article className="section post" key={post.id}>
+              return (
+                <article className="section post" key={post.id}>
                   <div className="columns">
                     <div className="column is-5">
                       <figure className="image is-3by2">
@@ -45,15 +93,15 @@ class App extends Component {
                     </div>
                     <div className="column is-2">
                       <div className="post__voteContainer">
-                        <a href="" className="post__vote post__vote--voteUp">
+                        <button className="post__vote post__vote--voteUp">
                           <FontAwesomeIcon icon={arrowUp} />
-                        </a>
+                        </button>
                         <strong className="post__voteNumber">
                           {post.votes}
                         </strong>
-                        <a href="" className="post__vote post__vote--voteDown">
+                        <button className="post__vote post__vote--voteDown">
                           <FontAwesomeIcon icon={arrowDown} />
-                        </a>
+                        </button>
                       </div>
                     </div>
                     <div className="column is-5">
@@ -62,9 +110,7 @@ class App extends Component {
                           {post.title}
                         </a>
                       </h2>
-                      <p className="content is-medium">
-                        {post.description}
-                      </p>
+                      <p className="content is-medium">{post.description}</p>
                       <div className="containerFlex">
                         <span className="post__author">Escrito por:</span>
                         <figure className="image is-32x32">
@@ -73,11 +119,13 @@ class App extends Component {
                       </div>
                     </div>
                   </div>
-                </article>;
+                </article>
+              );
             })}
           </section>
         </div>
-      </div>;
+      </div>
+    );
   }
 }
 
