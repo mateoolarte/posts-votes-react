@@ -1,0 +1,14 @@
+.containerFlex {
+  display: flex;
+  align-items: center;
+}
+
+.post__author {
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.containerFlex img {
+  border-radius: 50%;
+}

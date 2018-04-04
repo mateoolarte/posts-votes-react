@@ -1,0 +1,14 @@
+.sortPosts {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 568px) {
+  .sortPosts {
+    flex-direction: column;
+  }
+
+  .sortPosts button {
+    margin: 0.5rem;
+  }
+}
