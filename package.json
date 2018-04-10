@@ -1,8 +1,8 @@
 {
-  "name": "react-posts-votes",
+  "name": "posts-votes-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mateoolarte.com/react-posts-votes",
+  "homepage": "https://mateoolarte.com/posts-votes-react",
   "dependencies": {
     "bulma": "^0.6.2",
     "gh-pages": "^1.1.0",
